@@ -230,7 +230,15 @@ fun JarvisOfflineApp(onSpeak: (String) -> Unit, onWakeChanged: (Boolean) -> Unit
             lower.contains("what date") || lower == "date" || lower.contains("ഇന്നത്തെ തീയതി") -> "Today is ${SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault()).format(Date())}."
             lower.contains("open settings") || lower.contains("ക്രമീകരണങ്ങൾ തുറക്കൂ") -> { context.startActivity(Intent(Settings.ACTION_SETTINGS)); "Opening Android Settings." }
             lower.contains("open youtube") || lower.contains("യൂട്യൂബ് തുറക്കൂ") -> { openApp(context, "com.google.android.youtube"); "Opening YouTube if installed." }
-            lower.contains("open chrome") || lower.contains("open browser") -> { val launch = context.packageManager.getLaunchIntentForPackage("com.android.chrome"); if (launch != null) context.startActivity(launch) else "Chrome is not installed." }
+            lower.contains("open chrome") || lower.contains("open browser") -> {
+    val launch = context.packageManager.getLaunchIntentForPackage("com.android.chrome")
+    if (launch != null) {
+        context.startActivity(launch)
+        "Opening Chrome."
+    } else {
+        "Chrome is not installed."
+    }
+            }
             lower.contains("open maps") -> { openApp(context, "com.google.android.apps.maps"); "Opening Maps if installed." }
             lower.contains("search notes") || lower.contains("find note") || lower.contains("കുറിപ്പ് തിരയുക") -> { val term = text.substringAfterLast(' ').lowercase(); val found = notes.filter { it.lowercase().contains(term) }; if (found.isEmpty()) "No matching saved notes." else found.take(5).joinToString("\n") }
             else -> null
