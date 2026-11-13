@@ -2,19 +2,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Microphone -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- Notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
 
+    <!-- Keep CPU awake when required -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <queries>
+        <!-- Speech recognition -->
         <intent>
             <action android:name="android.speech.RecognitionService" />
         </intent>
 
+        <!-- Supported apps -->
         <package android:name="com.google.android.youtube" />
         <package android:name="com.android.chrome" />
         <package android:name="com.google.android.apps.maps" />
